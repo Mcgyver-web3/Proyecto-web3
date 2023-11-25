@@ -1,0 +1,50 @@
+.icon-Image {
+    height: 7rem;
+}
+
+.icon-Input {
+    height: 1rem;
+}
+
+.icon-Google {
+    height: 1.6rem;
+}
+
+.size-Card {
+    width: 25rem;
+}
+
+.remember {
+    font-size: 0.9rem;
+}
+
+.forgot-Password {
+    font-size: 0.9rem;
+}
+
+.div_or {
+    height: 0.9rem;
+}
+
+.color-button{
+    background-color: #75C7BF;
+}
+
+.color-button:hover{
+    background-color: #F2B705;
+}
+
+.color-icon{
+    background-color: #75C7BF;
+}
+
+.text-color{
+    color: #75C7BF;
+}
+
+.text-color:hover{
+    color: #F2B705;
+}
+
+
+

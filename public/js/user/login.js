@@ -27,15 +27,22 @@ btnLogin.addEventListener('click', function () {
                     });
                 })
                 .catch(function (FirebaseError) {
-                    var mensaje = "Error adding document: " + FirebaseError
-                    alert(mensaje);
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Error al actualizar datos del usuario: ' + FirebaseError,
+                        icon: 'error'
+                    });
                 });
         })
         .catch((error) => {
-            var mensaje = "Error user access: " + error.message;
-            alert(mensaje);
+            Swal.fire({
+                title: 'Error',
+                text: 'Error de acceso al usuario: ' + error.message,
+                icon: 'error'
+            });
         });
 });
+
 
 // Google Login
 const googleLogin = document.querySelector('#googleLogin');
@@ -64,15 +71,21 @@ googleLogin.addEventListener('click', e => {
                     });
                 })
                 .catch(function (FirebaseError) {
-                    var mensaje = "Error updating document: " + FirebaseError;
-                    alert(mensaje);
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: 'Error al actualizar documento: ' + FirebaseError,
+                        icon: 'error'
+                    });
                 });
         })
         .catch(error => {
-            console.log(error);
-            var mensaje = "Error with Google sign in: " + error.message;
-            alert(mensaje);
+            Swal.fire({
+                title: '¡Error!',
+                text: 'Error con el inicio de sesión de Google: ' + error.message,
+                icon: 'error'
+            });
         });
 });
+
 
 
