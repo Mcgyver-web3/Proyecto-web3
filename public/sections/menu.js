@@ -23,6 +23,9 @@ class Menu extends HTMLElement{
                 <li class="nav-item">
                     <a class="nav-link" href="customers.html#">Clientes</a>
                 </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#" onclick="salir()">Cerrar sesión</a>
+                 </li>
             </ul>
         </div>
     </div>

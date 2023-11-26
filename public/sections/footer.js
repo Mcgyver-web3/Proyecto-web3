@@ -15,7 +15,7 @@ class Footer extends HTMLElement{
 <div class="redes-containar">
     <ul>
     <li><a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a></li>
-    <li><a href="https://twitter.com/" class="twitter"><i class="fa-brands fa-x-twitter"></i></a></li>
+    <li><a href="https://x.com/" class="twitter"><i class="fa-brands fa-x-twitter"></i></a></li>
     <li><a href="https://instagram.com/" class="instagram"><i class="fa fa-instagram"></i></a></li>
     </ul>
 </div>` 

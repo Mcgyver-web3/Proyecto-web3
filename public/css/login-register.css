@@ -3,15 +3,20 @@
 }
 
 .icon-Input {
-    height: 1rem;
+    height: auto;
+    width: 18px;
 }
 
 .icon-Google {
     height: 1.6rem;
 }
 
+.form-control.large-input {
+    height: 3em; /* o cualquier valor que prefieras */
+}
+
 .size-Card {
-    width: 25rem;
+    width: 28rem;
 }
 
 .remember {
@@ -45,6 +50,7 @@
 .text-color:hover{
     color: #F2B705;
 }
+
 
 
 
