@@ -24,14 +24,28 @@ class Menu extends HTMLElement{
                     <a class="nav-link" href="customers.html#">Clientes</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#" onclick="salir()">Cerrar sesión</a>
-                 </li>
+             <img id="userPhoto" src="img/logo/perfil.png" alt="User Photo" style="width: 50px; height: 50px; border-radius: 50%;">
+            <a class="nav-link" href="#" onclick="salir()">Cerrar sesión</a>
+</li>
             </ul>
         </div>
     </div>
 </nav>`
     }
+
+    updateUserPhoto(url) {
+        const userPhotoElement = this.querySelector('#userPhoto');
+        if (userPhotoElement) {
+            userPhotoElement.src = url;
+            userPhotoElement.hidden = false; // Asegúrate de mostrar la imagen
+            // Asegúrate de que el estilo display sea el apropiado para tu diseño
+            userPhotoElement.style.display = 'inline-block'; 
+        }
+    }
 }
+
+
+
 
 customElements.define('menu-component', Menu);
 

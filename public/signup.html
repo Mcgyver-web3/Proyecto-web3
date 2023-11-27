@@ -38,9 +38,35 @@
     <script defer src="/__/firebase/10.5.2/firebase-auth-compat.js"></script>
     <script defer src="/__/firebase/10.5.2/firebase-database-compat.js"></script>
     <script defer src="/__/firebase/10.5.2/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/10.5.2/firebase-storage-compat.js"></script>
 
     <!-- initilized firebase object -->
     <script defer src="/__/firebase/init.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function iniImage(){
+            $('#txtUrlPhoto').change(function(e){
+                addImage(e);
+            });
+        }
+
+        function addImage(e){
+            var file = e.target.files[0];
+            var	imageType = /image.*/;
+
+            if(!file.type.match(imageType))
+                return;
+            var reader = new FileReader();
+            reader.onload = function(e){
+                var result=e.target.result;
+                $('#imgSalida').attr("src",result);
+            }
+            reader.readAsDataURL(file);
+        }
+
+        iniImage()
+    </script>
 
     <title>Registro nuevo usuario</title>
 </head>
@@ -65,19 +91,19 @@
             <div class="input-group-text color-icon ">
                 <img class="icon-Input" src="img/login/education-icon.svg" alt="education-icon">
             </div>
-            <input class="form-control" type="text" placeholder="Grado académico" id="txtAcademico">
+            <input class="form-control" type="text" placeholder="Grado académico" id="txtGradoAcademico">
         </div>
         <div class="input-group mt-2">
             <div class="input-group-text color-icon ">
                 <img class="icon-Input" src="img/login/question-icon.svg" alt="question-icon">
             </div>
-            <textarea class="form-control" rows="4" placeholder="Una breve descripción de 'quién soy yo' " id="txtAcademico"></textarea>
+            <textarea class="form-control" rows="4" placeholder="Una breve descripción de 'quién soy yo' " id="txtDescripcion"></textarea>
         </div>
         <div class="input-group mt-2">
             <span class="input-group-text color-icon">
-                <img class="icon-Input" src="img/login/cam-icon.svg" alt="cam-icon"> <!-- Asegúrate de reemplazar con la ruta correcta del ícono -->
+                <img class="icon-Input" src="img/login/cam-icon.svg" alt="cam-icon">
             </span>
-            <input type="file" class="form-floating ms-2" id="txtUrlImage" onchange="iniImage()">
+            <input type="file" class="form-floating ms-2" id="txtUrlPhoto" onchange="iniImage()">
         </div>
 
      

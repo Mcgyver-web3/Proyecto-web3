@@ -2,94 +2,66 @@
 // create local database firestore variable
 var db = firebase.apps[0].firestore();
 var auth = firebase.apps[0].auth();
+var container = firebase.apps[0].storage().ref();
 
 // create local from webpage inputs
 const txtNombre = document.querySelector('#txtNombre');
 const txtEmail = document.querySelector('#txtEmail');
 const txtContra = document.querySelector('#txtContra');
+const txtUrlPhoto = document.querySelector('#txtUrlPhoto');
+const txtGradoAcademico = document.querySelector('#txtGradoAcademico');
+const txtDescripcion = document.querySelector('#txtDescripcion');
 
 // create local insert button
 const btnInsUser = document.querySelector('#btnInsUser');
 
 // assign button listener
 btnInsUser.addEventListener('click', function () {
-    auth.createUserWithEmailAndPassword(txtEmail.value, txtContra.value)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            db.collection("datosUsuarios").add({
-                "idemp": user.uid,
-                "usuario": txtNombre.value,
-                "email": user.email
-            })
-            .then(function (docRef) {
-                Swal.fire({
-                    title: '¡Éxito!',
-                    text: 'Usuario agregado con éxito',
-                    icon: 'success'
-                }).then((result) => {
-                    if (result.value) {
-                        window.location.href = 'login.html';
-                    }
-                });
-            })
-            .catch(function (FirebaseError) {
-                Swal.fire(
-                    '¡Error!',
-                    'Error al registrar datos del usuario: ' + FirebaseError,
-                    'error'
-                );
-            });
-        })
-        .catch((error) => {
-            Swal.fire(
-                '¡Error!',
-                'Error al agregar el nuevo usuario: ' + error.message,
-                'error'
-            );
-        });
-});
-
-
-// Google Login
-const googleLogin = document.querySelector('#googleLogin');
-googleLogin.addEventListener('click', e => {
-    e.preventDefault(); // Previene el comportamiento por defecto del botón
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    auth.signInWithPopup(provider)
-        .then(result => {
-            const user = result.user;
-            const dt = new Date();
-
-            // Actualizar la última fecha de acceso en Firestore
-            db.collection("datosUsuarios").where('idemp', '==', user.uid).get()
-                .then(function (docRef) {
-                    if(docRef.empty) {
-                        console.log('No user record found. Redirecting...');
-                        document.location.href = 'index.html';
-                        return;
-                    }
-                    docRef.forEach(function (doc) {
-                        doc.ref.update({ ultAcceso: dt }).then(function () {
-                            console.log('Last access date updated. Redirecting...');
-                            document.location.href = 'index.html';
+    const archivo = txtUrlPhoto.files[0];
+    const nomarch = archivo.name;
+    if (archivo == null) {
+        alert('Debe seleccionar una imagen');
+    } else {
+        const metadata = {
+            contentType: archivo.type
+        };
+        const subir = container.child('userPhotos/' + nomarch).put(archivo, metadata);
+        subir.then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+                // Crear usuario con email y contraseña
+                auth.createUserWithEmailAndPassword(txtEmail.value, txtContra.value)
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        // Guardar datos del usuario en Firestore
+                        db.collection("datosUsuarios").add({
+                            "idemp": user.uid,
+                            "usuario": txtNombre.value,
+                            "email": user.email,
+                            "gradoAcademico": txtGradoAcademico.value,
+                            "descripcion": txtDescripcion.value,
+                            "urlPhoto": url
+                        }).then(function (docRef) {
+                            alert("ID del registro: " + docRef.id);
+                            limpiar();
+                            // Redirigir al usuario a la página de inicio de sesión
+                            window.location.href = 'login.html';
+                        }).catch(function (FirebaseError) {
+                            alert("Error al guardar los datos del usuario: " + FirebaseError);
                         });
+                    }).catch((error) => {
+                        alert("Error al crear el nuevo usuario: " + error.message);
                     });
-                })
-                .catch(function (FirebaseError) {
-                    Swal.fire({
-                        title: '¡Error!',
-                        text: 'Error al actualizar documento: ' + FirebaseError,
-                        icon: 'error'
-                    });
-                });
-        })
-        .catch(error => {
-            Swal.fire({
-                title: '¡Error!',
-                text: 'Error con el inicio de sesión de Google: ' + error.message,
-                icon: 'error'
+            }).catch((error) => {
+                alert("Error al subir la imagen: " + error.message);
             });
-        });
+    }
 });
 
+function limpiar() {
+    txtNombre.value= '';
+    txtEmail.value= '';
+    txtContra.value= '';
+    txtGradoAcademico.value = '';
+    txtDescripcion.value = '';
+    txtUrlPhoto.value = '';
+}

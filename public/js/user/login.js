@@ -19,9 +19,12 @@ btnLogin.addEventListener('click', function () {
             const user = userCredential.user;
             const dt = new Date();
             db.collection("datosUsuarios").where('idemp', '==', user.uid).get()
-                .then(function (docRef) {
-                    docRef.forEach(function (doc){
-                        doc.ref.update({ultAcceso:dt}).then(function (){
+                .then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        // Aquí se guarda la URL de la foto en el almacenamiento local
+                        localStorage.setItem('userPhotoURL', doc.data().urlPhoto);
+                        doc.ref.update({ultAcceso: dt}).then(function () {
+                            // Redirección a 'index.html' después de guardar la URL de la foto
                             document.location.href = 'index.html';
                         });
                     });
@@ -42,6 +45,7 @@ btnLogin.addEventListener('click', function () {
             });
         });
 });
+
 
 
 // Google Login

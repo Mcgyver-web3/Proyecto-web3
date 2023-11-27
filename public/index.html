@@ -39,6 +39,19 @@
     <!-- calling user authentication functions -->
     <script defer src="js/user/isLogin.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menu = document.querySelector('menu-component');
+            const userPhotoURL = localStorage.getItem('userPhotoURL');
+            if (menu && userPhotoURL) {
+                // Llama a la función updateUserPhoto en tu menú para actualizar la imagen
+                menu.updateUserPhoto(userPhotoURL);
+                // Limpia la URL de la foto del almacenamiento local si ya no se necesita
+                localStorage.removeItem('userPhotoURL');
+            }
+        });
+    </script>
+
     <title>Inicio</title>
 </head>
 
