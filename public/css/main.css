@@ -9,6 +9,7 @@ body {
     padding-top: 60px;
     padding-left: 25px;
     padding-right: 25px;
+      
 }
 
 .linea_sep {
@@ -116,6 +117,10 @@ body {
 
 .fondo-menu {
     background-color: #98E5DB;
+}
+
+.fondo-footer{
+    background-color: white;
 }
 
 

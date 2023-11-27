@@ -1,7 +1,8 @@
 class Footer extends HTMLElement{
     constructor(){
         super();
-        this.innerHTML=`<br><hr>
+        this.innerHTML=`<div class="">
+        <br><hr>
 <div class="div_pi">
     <strong>Ubicados: </strong>Costa Rica, Puntarenas.<br/>
     <strong>eMail:    </strong> <a href="mailto:mcgyverweb@gmail.com?subject=Solicito información">mcgyverweb@gmail.com</a><br />
@@ -18,6 +19,7 @@ class Footer extends HTMLElement{
     <li><a href="https://x.com/" class="twitter"><i class="fa-brands fa-x-twitter"></i></a></li>
     <li><a href="https://instagram.com/" class="instagram"><i class="fa fa-instagram"></i></a></li>
     </ul>
+</div>
 </div>` 
     }     
 }

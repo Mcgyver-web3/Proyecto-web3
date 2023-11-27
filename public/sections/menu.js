@@ -15,13 +15,13 @@ class Menu extends HTMLElement{
                         <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="categories.html">Investigaciones</a>
+                        <a class="nav-link"  href="index.html">Investigaciones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="suppliers.html">Subir investigaciones</a>
+                        <a class="nav-link" href="investigation.html">Subir investigaciones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="customers.html#">Sobre nosotros</a>
+                        <a class="nav-link" href="aboutUs.html">Sobre nosotros</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
