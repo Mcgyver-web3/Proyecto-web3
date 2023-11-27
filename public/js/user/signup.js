@@ -41,18 +41,37 @@ btnInsUser.addEventListener('click', function () {
                             "descripcion": txtDescripcion.value,
                             "urlPhoto": url
                         }).then(function (docRef) {
-                            alert("ID del registro: " + docRef.id);
-                            limpiar();
-                            // Redirigir al usuario a la página de inicio de sesión
-                            window.location.href = 'login.html';
+                            Swal.fire({
+                                title: '¡Registro Completo!',
+                                text: 'ID del registro: ' + docRef.id,
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    limpiar();
+                                    window.location.href = 'login.html';
+                                }
+                            });
                         }).catch(function (FirebaseError) {
-                            alert("Error al guardar los datos del usuario: " + FirebaseError);
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Error al guardar los datos del usuario: ' + FirebaseError,
+                                icon: 'error'
+                            });
                         });
                     }).catch((error) => {
-                        alert("Error al crear el nuevo usuario: " + error.message);
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Error al crear el nuevo usuario:  ' + error.message,
+                            icon: 'error'
+                        });
                     });
             }).catch((error) => {
-                alert("Error al subir la imagen: " + error.message);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Error al subir la imagen: ' + error.message,
+                    icon: 'error'
+                });
             });
     }
 });

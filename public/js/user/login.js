@@ -57,7 +57,15 @@ googleLogin.addEventListener('click', e => {
     auth.signInWithPopup(provider)
         .then(result => {
             const user = result.user;
+            const userPhotoUrl = user.photoURL; // Obtener la URL de la foto del usuario
             const dt = new Date();
+
+            // Actualizar la foto en el menú (o en el elemento correspondiente)
+            const userPhotoElement = document.querySelector('#userPhoto');
+            if (userPhotoElement) {
+                userPhotoElement.src = userPhotoUrl;
+                userPhotoElement.style.display = 'inline-block'; 
+            }
 
             // Actualizar la última fecha de acceso en Firestore
             db.collection("datosUsuarios").where('idemp', '==', user.uid).get()
@@ -90,6 +98,7 @@ googleLogin.addEventListener('click', e => {
             });
         });
 });
+
 
 
 

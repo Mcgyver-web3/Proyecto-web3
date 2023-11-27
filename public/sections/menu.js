@@ -27,8 +27,8 @@ class Menu extends HTMLElement{
                 <ul class="navbar-nav">
                 <li class="nav-item text-center">
     <img id="userPhoto" src="img/logo/perfil.png" alt="User Photo" 
-    style="width: 50px; height: 50px; border-radius: 50%; border: 1px solid black;">
-    <a class="nav-link" href="#" onclick="salir()" style="display: block;">Cerrar sesión</a>
+    style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid black;">
+    <a class="nav-link active" href="#" onclick="salir()" style="display: block;">Cerrar sesión</a>
 </li>
             </ul>
             </div>
