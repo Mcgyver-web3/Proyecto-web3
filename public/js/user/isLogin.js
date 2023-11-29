@@ -24,7 +24,7 @@ function salir(){
   
     auth.signOut().then(() => {
         
-        document.location.href ='login.html';
+        document.location.href ='index.html';
     }).catch((error)=>{
       
         Swal.fire(
