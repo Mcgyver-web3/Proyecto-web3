@@ -15,9 +15,12 @@ service cloud.firestore {
     match /{Categories}/{document=**}{
       allow read:if true;
       allow create: if request.resource.data.CategoryID is int &&
-                       request.resource.data.CategoryName is string &&
-                       request.resource.data.Description is string &&
-                       request.resource.data.urlImage is string;
+                   request.resource.data.CategoryName is string &&
+                   request.resource.data.Description is string &&
+                   request.resource.data.urlPdf is string &&
+                   request.resource.data.urlImages is list && 
+                   request.resource.data.urlImages.size() > 0 && 
+                   request.resource.data.urlImages.size() <= 6;
       allow update: if false;
       allow delete: if false;
     }

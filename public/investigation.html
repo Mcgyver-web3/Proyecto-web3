@@ -22,6 +22,8 @@
 
     <!-- Custom style -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/investigation.css">
+    
 
     <!-- call menu and footer sections -->
     <script src="sections/menu.js" defer></script>
@@ -54,11 +56,11 @@
     </header>
 
 <main>
-    <h4>Listado de Categorías</h4>
+    <h4>Lista de investigaciones</h4>
     <br>
     <div id="tablaCateg"></div>
     <br>
-    <button type="button" class="btn btn-sm btn-primary" onClick="inscateg()">Agregar Categoría</button>
+    <button type="button" class="btn btn-sm btn-primary add-investigation" onClick="inscateg()">Agregar investigación</button>
 </main>
 
 <footer>
@@ -71,6 +73,7 @@
 <!-- load js code to storage data  -->
 <script defer src="js/category/lstCategories.js"></script>
 <script defer src="js/user/user-state-updater.js"></script>
+<script defer src="js/user/authen.js"></script>
 
 </body>
 

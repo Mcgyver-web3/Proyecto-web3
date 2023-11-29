@@ -22,6 +22,7 @@
 
     <!-- Custom style -->
     <link rel="stylesheet" href="css/main.css">
+   
 
     <!-- call menu and footer sections -->
     <script src="sections/menu.js" defer></script>
@@ -65,6 +66,33 @@
         iniImage()
     </script>
 
+<script>
+    function iniPdf() {
+      $('#txtUrlPdf').change(function(e) {
+        addPdf(e);
+      });
+    }
+  
+    function addPdf(e) {
+      var file = e.target.files[0];
+      var pdfType = 'application/pdf';
+  
+      if (file.type !== pdfType) {
+        alert("El archivo no es un PDF.");
+        return;
+      }
+  
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var result = e.target.result;
+        $('#pdfSalida').attr("src", result).show(); // Muestra el elemento embed
+      }
+      reader.readAsDataURL(file);
+    }
+  
+    iniPdf();
+  </script>
+
     <title>Agrega Categoría</title>
 </head>
 
@@ -96,7 +124,12 @@
 
             <tr>
                 <td><strong>Image</strong></td>
-                <td><input type="file" id="txtUrlImage" onchange="iniImage()"></td>
+                <td><input type="file" id="txtUrlImage" onchange="iniImage()" multiple></td>
+            </tr>
+
+            <tr>
+                <td><strong>PDF</strong></td>
+                <td><input type="file" id="txtUrlPdf" onchange="iniPdf()"></td>
             </tr>
 
             <tr>
@@ -118,6 +151,7 @@
 
 <!-- load js code to storage data  -->
 <script defer src="js/category/adCategory.js"></script>
+<script defer src="js/user/authen.js"></script>
 
 </body>
 
