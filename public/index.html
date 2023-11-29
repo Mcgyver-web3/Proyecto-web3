@@ -22,6 +22,7 @@
 
     <!-- Custom style -->
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
 
     <!-- call menu and footer sections -->
     <script src="sections/menu.js" defer></script>
@@ -36,20 +37,7 @@
     <!-- initilized firebase object -->
     <script defer src="/__/firebase/init.js"></script>
 
-    <!-- calling user authentication functions -->
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menu = document.querySelector('menu-component');
-            const userPhotoURL = localStorage.getItem('userPhotoURL');
-            if (menu && userPhotoURL) {
-                // Llama a la función updateUserPhoto en tu menú para actualizar la imagen
-                menu.updateUserPhoto(userPhotoURL);
-                // Limpia la URL de la foto del almacenamiento local si ya no se necesita
-                localStorage.removeItem('userPhotoURL');
-            }
-        });
-    </script>
+    <script defer src="js/user/isLogin.js"></script>
 
     <title>Inicio</title>
 </head>
@@ -59,10 +47,95 @@
     <menu-component></menu-component>
 </header>
 
-<main class="vh-100">
-    <h4>Inicio</h4>
+<main>
+    <div class="imagenCentro">
+        <img src="img/principal/BIOLOGIA.png" class="img-fluid" alt="" max-width: 100%>
+    </div>
+
+
+    <div class="lineaCafe">
+        <div class="lineaCafe1">
+            <hr style=" height: 40px; background-color: rgb(99, 58, 58);" />
+        </div>
+
+
+    </div>
+    <div class="card-group carousel-inner >.item > img object-fit: scale-down; height: 50vh; width: 50%; ">
+        <div class="card">
+            <img src="img/principal/pajaro.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">TUCÁN</h5>
+                <p class="card-text">Se caracterizan por poseer un pico muy desarrollado y de vivos colores. Miden entre
+                    18 y 65 cm.
+                </p>
+
+            </div>
+        </div>        
+        <div class="card">
+            <img src="img/principal/NOSOTROS.jpeg" class="" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">SOBRE NOSOTROS</h5>
+                <p class="card-text">Estudiantes de la Universidad Técnica Nacional, en busca de una mayor facilidad
+                    de aprendizaje.
+                </p>
+                <div class="d-flex justify-content-center "><a href="aboutUs.html" class="boton1 btn btn-primary btn-1 mt-4 ">LEER
+                        +</a></div>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/principal/tortugas.jpeg" class="card-img-top" alt="...">
+            <div class="card-body ">
+                <h5 class="card-title ">TORTUGAS</h5>
+                <p class="card-text">Se puede encontrar en los mares tropicales y subtropicales.
+                    Su nombre se debe a la capa de grasa que puede encontrarse bajo su caparazón.
+                </p>
+            </div>
+        </div>
+    </div>
     <br>
-    <p>El texto que estas observando, es porque has logrado autenticarte ante el sitio demostratrivo para el Soporte de datos de NorthWind.</p>
+    <br>
+    <section class="container">
+        <h1 class="text text-center">EL MUNDO DE LA CIENCIA</h1>
+        <div class="imgP col-12 d-flex justify-content-center align-items-center ">
+            <img src="" alt="" width="150%" />
+        </div>
+    </section>
+    <br>
+    <br>
+
+    <div class="tarjeta">
+        <div class="cardIndividual">
+            <img src="img/principal/circulo1.jpeg" alt="Mujer">
+            <div class="label">Primaria</div>
+        </div>
+
+    </div>
+
+
+    <div class="tarjeta">
+        <div class="cardIndividual">
+            <img src="img/principal/circulo2.jpeg" alt="Mujer">
+            <div class="label">Secundaria</div>
+        </div>
+
+    </div>
+
+    <div class="tarjeta">
+        <div class="cardIndividual">
+            <img src="img/principal/circulo3.jpeg" alt="Mujer">
+            <div class="label">Universitario</div>
+        </div>
+
+    </div>
+
+    <div class="tarjeta">
+        <div class="cardIndividual">
+            <img src="img/principal/circulo4.jpeg" alt="Mujer">
+            <div class="label">Todos</div>
+        </div>
+
+    </div>
+
 </main>
 
 <footer>
@@ -71,6 +144,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </footer>
+
+<script defer src="js/user/user-state-updater.js"></script>
+
 </body>
+
 
 </html>

@@ -20,16 +20,22 @@ class Menu extends HTMLElement{
                     <li class="nav-item">
                         <a class="nav-link" href="investigation.html">Subir investigaciones</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="aboutUs.html">Sobre nosotros</a>
-                    </li>
                 </ul>
+                <ul class="nav-item dropdown active posicion-menu">
+									<a id="userName" class="nav-link dropdown-toggle invitado" href="#" role="button" data-bs-toggle="dropdown"
+									   aria-expanded="false">
+										Invitado
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_01">
+										<li><a class="dropdown-item" href="login.html">Iniciar sesión</a></li>
+										<li><a class="dropdown-item" href="#" onclick="salir()">Cerrar sesión</a></li>
+									</ul>
+								</ul>
                 <ul class="navbar-nav">
                 <li class="nav-item text-center">
     <img id="userPhoto" src="img/logo/perfil.png" alt="User Photo" 
-    style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid black;">
-    <a class="nav-link active" href="#" onclick="salir()" style="display: block;">Cerrar sesión</a>
-</li>
+    style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid black;">
+        </li>
             </ul>
             </div>
         </div>
@@ -46,6 +52,33 @@ class Menu extends HTMLElement{
             // Asegúrate de que el estilo display sea el apropiado para tu diseño
             userPhotoElement.style.display = 'inline-block'; 
         }
+    }
+
+    updateState() {
+        const savedUserPhotoURL = localStorage.getItem('userPhotoURL');
+        const savedUserName = localStorage.getItem('userName'); // Agregado para recuperar el nombre del usuario
+        
+        if (savedUserPhotoURL) {
+            this.updateUserPhoto(savedUserPhotoURL);
+        }
+        if (savedUserName) { // Verifica si existe un nombre de usuario guardado y lo actualiza
+            this.updateUserName(savedUserName);
+        }
+    }
+    // connectedCallback se llama cuando el elemento se conecta al DOM
+    connectedCallback() {
+        this.updateState();
+    }
+
+    updateUserName(name) {
+        const userNameElement = this.querySelector('#userName');
+        if (userNameElement) {
+            userNameElement.textContent = name;
+        }
+    }
+
+    connectedCallback() {
+        this.updateState();
     }
 }
 

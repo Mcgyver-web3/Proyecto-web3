@@ -122,5 +122,18 @@ body {
     background-color: white;
 }
 
+.posicion-menu {
+    transform: translateY(20%); /* Use transform to accurately center the element */
+    right: 22px;        /* Add some space between the dropdown and the image */
+  }
+
+
+.invitado{
+    color: #000000;
+}
+
+.invitado:hover{
+    color: #d92e7f;
+}
 
 

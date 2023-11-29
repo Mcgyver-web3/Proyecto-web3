@@ -23,7 +23,9 @@ btnLogin.addEventListener('click', function () {
                     querySnapshot.forEach(function (doc) {
                         // Aquí se guarda la URL de la foto en el almacenamiento local
                         localStorage.setItem('userPhotoURL', doc.data().urlPhoto);
+                        localStorage.setItem('userName', doc.data().usuario);
                         doc.ref.update({ultAcceso: dt}).then(function () {
+                            document.getElementById('userName').textContent = doc.data().usuario;
                             // Redirección a 'index.html' después de guardar la URL de la foto
                             document.location.href = 'index.html';
                         });
