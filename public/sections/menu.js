@@ -3,7 +3,7 @@ class Menu extends HTMLElement{
         super();
         this.innerHTML=` <nav class="navbar navbar-expand-lg navbar-light fondo-menu fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.html">
                 <img src="img/logo/logo-oficial.png" alt="" width="65%" class="d-inline-block align-text-top">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@ class Menu extends HTMLElement{
                 <ul class="navbar-nav">
                 <li class="nav-item text-center">
     <img id="userPhoto" src="img/logo/perfil.png" alt="User Photo" 
-    style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid black;">
+    style="width: 70px; height: 70px; border-radius: 50%; border: 2px solid black;">
         </li>
             </ul>
             </div>
