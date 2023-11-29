@@ -12,38 +12,20 @@ service cloud.firestore {
       allow update: if true;
       allow delete: if false;
     }
-    match /{Categories}/{document=**}{
-      allow read:if true;
-      allow create: if request.resource.data.CategoryID is int &&
-                   request.resource.data.CategoryName is string &&
-                   request.resource.data.Description is string &&
-                   request.resource.data.urlPdf is string &&
-                   request.resource.data.urlImages is list && 
-                   request.resource.data.urlImages.size() > 0 && 
-                   request.resource.data.urlImages.size() <= 6;
-      allow update: if false;
-      allow delete: if false;
-    }
 
-    match /{datosInvestigacion}/{document=**}{
-      allow read:if true;
-      allow create: if request.resource.data.idemp is string &&
-                        request.resource.data.titulo is string &&
-                        request.resource.data.area is string &&
-                        request.resource.data.descripcion is string &&
-                        request.resource.data.urlDocumento is string &&
-                        request.resource.data.urlImagen1 is string &&
-                        request.resource.data.urlImagen2 is string &&
-                        request.resource.data.urlImagen3 is string &&
-                        request.resource.data.urlImagen4 is string &&
-                        request.resource.data.urlImagen5 is string &&
-                        request.resource.data.urlImagen6 is string &&
-                        request.resource.data.conclusion is string &&
-                        request.resource.data.recomendacion is string &&
-                        request.resource.data.fechaSubida is string;
-      allow update: if true;
-      allow delete: if true;
-    }
+   match /{datosInvestigacion}/{document=**} {
+    allow read, update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    allow create: if request.auth != null && request.resource.data.userId == request.auth.uid &&
+                    request.resource.data.titulo is string &&
+                    request.resource.data.area is string &&
+                    request.resource.data.descripcion is string &&
+                    request.resource.data.urlPdf is string &&
+                    request.resource.data.urlImages is list &&
+                    request.resource.data.urlImages.size() > 0 && 
+                    request.resource.data.urlImages.size() <= 6 &&
+                    request.resource.data.conclusion is string &&
+                    request.resource.data.recomendacion is string;
+  }
 
   }
 }

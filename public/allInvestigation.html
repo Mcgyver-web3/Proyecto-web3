@@ -41,16 +41,10 @@
     <!-- calling user authentication functions -->
     <script defer src="js/user/isLogin.js"></script>
 
-    <script>
-        function insInvest() {
-            location.href = "insInvestigation.html";
-        }
-    </script>
-
     <title>Listado de investigaciones</title>
 </head>
 
-<body class="container-fluid" onload="validar()">
+<body class="container-fluid">
     <header>
         <menu-component></menu-component>
     </header>
@@ -60,7 +54,6 @@
     <br>
     <div id="tablaCateg"></div>
     <br>
-    <button type="button" class="btn btn-sm btn-primary add-investigation" onClick="insInvest()">Agregar investigación</button>
 </main>
 
 <footer>
@@ -71,7 +64,7 @@
 </footer>
 
 <!-- load js code to storage data  -->
-<script defer src="js/investigation/lstInvestigations.js"></script>
+<script defer src="js/investigation/allInvestigation.js"></script>
 <script defer src="js/user/user-state-updater.js"></script>
 <script defer src="js/user/authen.js"></script>
 

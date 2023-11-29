@@ -136,4 +136,9 @@ body {
     color: #FAAE1C;
 }
 
+.img-preview {
+    max-width: 100px; /* Ajusta según necesites */
+    height: auto;
+    margin: 5px;
+  }
 

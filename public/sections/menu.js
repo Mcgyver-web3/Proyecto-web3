@@ -15,7 +15,7 @@ class Menu extends HTMLElement{
                         <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="index.html">Investigaciones</a>
+                        <a class="nav-link"  href="allInvestigation.html">Investigaciones</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="investigation.html">Subir investigaciones</a>
