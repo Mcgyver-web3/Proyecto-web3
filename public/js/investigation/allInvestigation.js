@@ -1,61 +1,61 @@
 var db = firebase.apps[0].firestore();
-const tabla = document.querySelector('#tablaCateg');
+const tabla = document.querySelector('#tablaAllInvestigation');
 
 // Llama a cargarCategorias directamente cuando la página se carga
 cargarCategorias();
 
-function cargarCategorias() { 
-    db.collection("datosInvestigacion")
-      .get()
-      .then(function(query){
-          tabla.innerHTML = "";
-          var salida = "<table class=\"table table-striped\">" +
-                       "    <thead>" +
-                       "        <tr>" +
-                       "            <td><strong>Titulo de la investigación</strong></td>" +
-                       "            <td><strong>Área de interés</strong></td>" +
-                       "            <td><strong>Descripción</strong></td>" +
-                       "            <td><strong>Imagenes</strong></td>" +
-                       "            <td><strong>PDF</strong></td>" +
-                       "            <td><strong>Conclusión</strong></td>" +
-                       "            <td><strong>Recomendación</strong></td>" +
-                       "        </tr>" +
-                       "    </thead><tbody>";
+function cargarCategorias() {
+    db.collection("datosInvestigacion").get().then(querySnapshot => {
+        tabla.innerHTML = "";
+        let investigaciones = [];
 
-          query.forEach(function(doc){
-              salida += '<tr>';
-              salida += '<td>' + doc.data().titulo + '</td>';
-              salida += '<td>' + doc.data().area + '</td>';
-              salida += '<td>' + doc.data().descripcion + '</td>';
+        querySnapshot.forEach(doc => {
+            let datosInvestigacion = doc.data();
+            if (datosInvestigacion.userId) {
+                // Buscar el documento de usuario correspondiente por su idemp (que debe ser igual al userId)
+                let promesaUsuario = db.collection("datosUsuarios").where("idemp", "==", datosInvestigacion.userId).get();
+                investigaciones.push(promesaUsuario.then(querySnapshotUsuario => {
+                    // Verificar que encontramos un usuario
+                    if (!querySnapshotUsuario.empty) {
+                        let datosUsuario = querySnapshotUsuario.docs[0].data(); // Tomar el primer documento ya que idemp es único
+                        let gradoAcademico = datosUsuario.gradoAcademico || 'Grado no especificado';
+                        return construirTarjetaInvestigacion(datosInvestigacion, gradoAcademico);
+                    } else {
+                        console.error(`No se encontró el usuario con userId: ${datosInvestigacion.userId}`);
+                        return construirTarjetaInvestigacion(datosInvestigacion, 'Grado no especificado');
+                    }
+                }));
+            } else {
+                console.error(`La investigación con ID: ${doc.id} no tiene userId asociado.`);
+            }
+        });
 
-              // Agregar imágenes
-              let imagesHTML = '';
-              if (doc.data().urlImages) {
-                  doc.data().urlImages.forEach(url => {
-                      imagesHTML += '<img src="' + url + '" class="categoria-imagen">';
-                  });
-              } else {
-                  imagesHTML = 'No disponible';
-              }
-              salida += '<td>' + imagesHTML + '</td>';
-
-              // Agregar PDF
-              let pdfHTML = 'No disponible';
-              if (doc.data().urlPdf && doc.data().urlPdf.trim() !== "") {
-                  pdfHTML = `<a href="${doc.data().urlPdf}" target="_blank">
-                                <img src="img/listInvest/pdf.png" alt="PDF" class="categoria-imagen"> 
-                                <div>Ver PDF</div>
-                             </a>`;
-              }
-              salida += '<td>' + pdfHTML + '</td>';
-              salida += '<td>' + doc.data().conclusion + '</td>';
-              salida += '<td>' + doc.data().recomendacion + '</td>';
-
-             
-              salida += '</tr>';
-          });
-
-          salida += "</tbody></table>";
-          tabla.innerHTML = salida;
-      });
+        Promise.all(investigaciones).then(investigacionesHtml => {
+            tabla.innerHTML = `<div class="row">${investigacionesHtml.join('')}</div>`;
+        }).catch(error => {
+            console.error("Error al cargar las investigaciones: ", error);
+            tabla.innerHTML = '<p>Error al cargar las investigaciones.</p>';
+        });
+    }).catch(error => {
+        console.error("Error al obtener investigaciones: ", error);
+        tabla.innerHTML = '<p>Error al cargar las investigaciones.</p>';
+    });
 }
+
+function construirTarjetaInvestigacion(datosInvestigacion, gradoAcademico) {
+    return `
+        <div class="col-md-2">
+            <div class="card mb-4 shadow-sm">
+            <div class="card-header-custom">
+            <h5 class="card-title">${datosInvestigacion.titulo}</h5>
+            </div>
+                <div class="card-body-custom">
+                    <h6 class="card-subtitle mb-4 text-muted">Grado académico: ${gradoAcademico}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Área de interes: ${datosInvestigacion.area}</h6>
+                    <p class="card-text">${datosInvestigacion.descripcion}</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
