@@ -1,0 +1,44 @@
+@keyframes fadeIn {
+    from { 
+      opacity: 0; 
+      transform: translateX(-50px); /* La tarjeta comienza 50px a la izquierda de su posición final */
+  }
+   to {  
+   opacity: 1;
+    transform: translateX(0);
+  }
+}
+  .fade-in-card {
+    animation: fadeIn 1s ease-in-out;
+  }
+
+
+   /* DERECHA*/
+   @keyframes fadeInRight {
+    from { 
+      opacity: 0; 
+      transform: translateX(100px); /* La tarjeta comienza 50px a la izquierda de su posición final */
+  }
+    to { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+}
+  .fade-in-cardRight {
+    animation: fadeInRight 1s ease-in-out;
+  }
+
+  /* CENTRO */
+  @keyframes fadeInMiddle {
+    from { 
+      opacity: 0; 
+      transform: scale(0.10); /* La tarjeta comienza 50px a la izquierda de su posición final */
+  }
+    to { 
+    opacity: 1; 
+    transform: scale(0);
+  }
+}
+  .fade-in-cardMiddle {
+    animation: fadeInMiddle 1s ease-in-out;
+}

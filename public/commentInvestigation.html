@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
     <!-- Custom style -->
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/investigation.css">
+    <link rel="stylesheet" href="css/animationCard.css">
     <!-- call menu and footer sections -->
     <script src="sections/menu.js" defer></script>
     <script src="sections/footer.js" defer></script>
@@ -36,56 +36,11 @@
     <script defer src="/__/firebase/init.js"></script>
     <!-- calling user authentication functions -->
     <script defer src="js/user/isLogin.js"></script>
-    <script>
-        function insInvest() {
-            location.href = "insInvestigation.html";
-        }
-    </script>
-    <style>
-        /* IZQUIERDA */
-        @keyframes fadeIn {
-          from { 
-            opacity: 0; 
-            transform: translateX(-50px); /* La tarjeta comienza 50px a la izquierda de su posición final */
-        }
-          to { opacity: 1; }
-          transform: translateX(0);
-        }
-        .fade-in-card {
-          animation: fadeIn 1s ease-in-out;
-        }
 
-
-         /* DERECHA*/
-         @keyframes fadeInRight {
-          from { 
-            opacity: 0; 
-            transform: translateX(100px); /* La tarjeta comienza 50px a la izquierda de su posición final */
-        }
-          to { opacity: 1; }
-          transform: translateX(0);
-        }
-        .fade-in-cardRight {
-          animation: fadeInRight 1s ease-in-out;
-        }
-
-        /* CENTRO */
-        @keyframes fadeInMiddle {
-          from { 
-            opacity: 0; 
-            transform: scale(0.10); /* La tarjeta comienza 50px a la izquierda de su posición final */
-        }
-          to { opacity: 1; }
-          transform: scale(0);
-        }
-        .fade-in-cardMiddle {
-          animation: fadeInMiddle 1s ease-in-out;
-        }
-      </style>
-    <title>Listado de investigaciones</title>
+    
 </head>
 
-<body class="container-fluid" onload="validar()">
+<body class="container-fluid">
     <header>
         <menu-component></menu-component>
     </header>
@@ -384,7 +339,6 @@
     </footer>
 
     <!-- load js code to storage data  -->
-    <script defer src="js/investigation/lstInvestigations.js"></script>
     <script defer src="js/user/user-state-updater.js"></script>
     <script defer src="js/user/authen.js"></script>
 
