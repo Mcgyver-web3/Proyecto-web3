@@ -43,12 +43,15 @@ function cargarCategorias() {
 }
 
 function construirTarjetaInvestigacion(datosInvestigacion, gradoAcademico) {
+    // Suponiendo que 'datosInvestigacion.id' es un identificador único para cada investigación
+    var urlComment = 'commentInvestigation.html?id=' + datosInvestigacion.id;
+
     return `
-        <div class="col-md-2">
-            <div class="card mb-4 shadow-sm">
-            <div class="card-header-custom">
-            <h5 class="card-title">${datosInvestigacion.titulo}</h5>
-            </div>
+        <div class="col-md-2 ">
+            <div class="card mb-4 shadow-sm clickable-card" data-id="${datosInvestigacion.id}">
+                <div class="card-header-custom">
+                    <h5 class="card-title"><a href="${urlComment}">${datosInvestigacion.titulo}</a></h5>
+                </div>
                 <div class="card-body-custom">
                     <h6 class="card-subtitle mb-4 text-muted">Grado académico: ${gradoAcademico}</h6>
                     <h6 class="card-subtitle mb-2 text-muted">Área de interes: ${datosInvestigacion.area}</h6>
@@ -58,4 +61,6 @@ function construirTarjetaInvestigacion(datosInvestigacion, gradoAcademico) {
         </div>
     `;
 }
+
+
 
