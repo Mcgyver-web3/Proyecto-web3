@@ -1,12 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta value="no-cache, no-store, must-revalidate" name="no-chache">
+    <!-- Font Awesone kit, basic kit york license -->
+    <script src="https://kit.fontawesome.com/2c7bfef965.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.9.5/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
+    <!-- Custom style -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/investigation.css">
+    <!-- call menu and footer sections -->
+    <script src="sections/menu.js" defer></script>
+    <script src="sections/footer.js" defer></script>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.5.2/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/10.5.2/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.5.2/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.5.2/firebase-firestore-compat.js"></script>
+    <!-- initilized firebase object -->
+    <script defer src="/__/firebase/init.js"></script>
+    <!-- calling user authentication functions -->
+    <script defer src="js/user/isLogin.js"></script>
+    <script>
+        function insInvest() {
+            location.href = "insInvestigation.html";
+        }
+    </script>
+    <style>
+        /* IZQUIERDA */
+        @keyframes fadeIn {
+          from { 
+            opacity: 0; 
+            transform: translateX(-50px); /* La tarjeta comienza 50px a la izquierda de su posición final */
+        }
+          to { opacity: 1; }
+          transform: translateX(0);
+        }
+        .fade-in-card {
+          animation: fadeIn 1s ease-in-out;
+        }
+
+
+         /* DERECHA*/
+         @keyframes fadeInRight {
+          from { 
+            opacity: 0; 
+            transform: translateX(100px); /* La tarjeta comienza 50px a la izquierda de su posición final */
+        }
+          to { opacity: 1; }
+          transform: translateX(0);
+        }
+        .fade-in-cardRight {
+          animation: fadeInRight 1s ease-in-out;
+        }
+
+        /* CENTRO */
+        @keyframes fadeInMiddle {
+          from { 
+            opacity: 0; 
+            transform: scale(0.10); /* La tarjeta comienza 50px a la izquierda de su posición final */
+        }
+          to { opacity: 1; }
+          transform: scale(0);
+        }
+        .fade-in-cardMiddle {
+          animation: fadeInMiddle 1s ease-in-out;
+        }
+      </style>
+    <title>Listado de investigaciones</title>
 </head>
-<body>
-    Hola mundo
-    
+
+<body class="container-fluid" onload="validar()">
+    <header>
+        <menu-component></menu-component>
+    </header>
+
+    <main>
+        <h4 class="fade-in-card">Lista de investigaciones</h4>
+        <div class="container-fluid mt-4 fade-in-card">
+            <div class="row d-flex">
+                <!-- DISCIPLINA Column -->
+                <div class="col-md-4 d-flex">
+                    <div class="card flex-fill shadow fade-in-card">
+                        <div class="card-header alert-link alert-success">TITULO</div>
+                        <div class="card-body">
+                            DLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed cursus, nisi a pharetra rhoncus, odio ipsum fermentum arcu, a hendrerit
+                            erat elit eu mauris. Vivamus eu convallis leo, in condimentum lacus. Pellentesque
+                            massa
+                            <BR></BR>
+                            * sem, mollis a lobortis eget, efficitur vitae augue. Maecenas auctor, urna
+                            id facilisis semper, tellus erat aliquam purus, at egestas turpis lacus eu ligula.
+                            Morbi
+                            <BR></BR>
+                            turpis tortor, luctus vel est et, varius vestibulum ex. Duis ac diam at dolor
+                            maximus consequat at eu ex. Morbi sagittis turpis urna, non placerat ligula cursus id.
+                            Aenean vel dictum augue. Morbi id ligula faucibus, mattis magna ac, aliquam arcu. Duis
+                            fermentum eros vitae fermentum iaculis. Sed elementum commodo ultricies. Proin semper
+                            scelerisque risus, tristique volutpat leo blandit at. Morbi quis quam ante. Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                            potenti. Fusce in lectus ac eros bibendum iaculis vel non magna.
+                            Praesent elit tellus, vulputate feugiat eleifend id, vulputate a metus.
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                            <br>
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+
+                        </div>
+                    </div>
+                    <!-- Other sections -->
+                </div>
+
+                <!-- MAIN CONTENT Middle Column -->
+                <div class="col-md-4 d-flex flex-column">
+
+                    <!-- Existing Card -->
+                    <div class="card flex-fill mb-3 shadow fade-in-cardMiddle"> <!-- Use mb-3 for margin-bottom -->
+                        <div class="card-header alert-link alert-success">TITULO</div>
+                        <img src="img/principal/circulo1.jpeg" class="card-img-top img-fluid"
+                            alt="Descripción de la imagen">
+                        <div class="card-body">
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                        </div>
+                    </div>
+
+                    <!-- New Card Below the Existing One -->
+                    <div class="card flex-fill shadow fade-in-cardMiddle">
+                        <div class="card-header">NUEVO TITULO</div>
+                        <div class="card-body">
+                            <p>Aquí va el contenido de la nueva tarjeta que se encuentra debajo de la tarjeta existente
+                                en la columna central.</p>
+                            <!-- More content can be added here -->
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Right Column -->
+                <div class="col-md-4 d-flex">
+                    <div class="card flex-fill shadow fade-in-cardRight">
+                        <div class="card-header alert-link alert-success">TITULO</div>
+                        <div class="card-body">
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                            <br>
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                            <img src="img/principal/circulo1.jpeg" class="card-img-top img-fluid"
+                        </div>
+                    </div>
+                    <!-- Other sections -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card shadow fade-in-card">
+                    <div class="card-header alert-link alert-success">TÍTULO</div>
+                    <div class="card-body">
+                        <!-- Utilizamos el sistema de grillas para separar la imagen del texto -->
+                        <div class="row no-gutters">
+                            <!-- Columna para la imagen -->
+                            <div class="col-md-4">
+                                <img src="img/principal/NOSOTROS.jpeg" class="img-fluid rounded-start"
+                                    alt="Descripción de la imagen" style="margin-right: 15px;">
+                            </div>
+                            <!-- Columna para el texto -->
+                            <div class="col-md-8">
+                                <div class="card-text">
+                                    <p>dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                                        velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                                        Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                                        fermentum elit mauris vel tellus.
+                                        Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                                        Proin volutpat magna in quam varius, non accumsan massa cursus.
+                                        Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                                        dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                                        velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                                        Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                                        fermentum elit mauris vel tellus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card shadow fade-in-card">
+                    <div class="card-header alert-link alert-success">TÍTULO</div>
+                    <div class="card-body">
+                        <!-- Utilizamos el sistema de grillas para separar la imagen del texto -->
+                        <div class="row no-gutters">
+                            <!-- Columna para la imagen -->
+                            <div class="col-md-4">
+                                <img src="img/principal/circulo1.jpeg" class="img-fluid rounded-start"
+                                    alt="Descripción de la imagen" style="margin-right: 15px;">
+                            </div>
+                            <!-- Columna para el texto -->
+                            <div class="col-md-8">
+                                <div class="card-text">
+                                    <p>dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                                        velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                                        Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                                        fermentum elit mauris vel tellus.
+                                        Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                                        Proin volutpat magna in quam varius, non accumsan massa cursus.
+                                        Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                                        dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                                        velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                                        Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                                        fermentum elit mauris vel tellus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <!-- DISCIPLINA Column -->
+                <div class="col-md-4">
+                    <div class="card shadow fade-in-card">
+                        <div class="card-header alert-link alert-success">TITULO</div>
+                        <div class="card-body">
+                            DLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed cursus, nisi a pharetra rhoncus, odio ipsum fermentum arcu, a hendrerit
+                            erat elit eu mauris. Vivamus eu convallis leo, in condimentum lacus. Pellentesque
+                            massa sem,mollis a lobortis eget, efficitur vitae augue. Maecenas auctor, urna
+                            id facilisis semper, tellus erat aliquam purus, at egestas turpis lacus eu ligula.
+                            Morbi turpis tortor, luctus vel est et, varius vestibulum ex. Duis ac diam at dolor
+                            maximus consequat at eu ex. Morbi sagittis turpis urna, non placerat ligula cursus id.
+                            Aenean vel dictum augue. Morbi id ligula faucibus, mattis magna ac, aliquam arcu. Duis
+                            fermentum eros vitae fermentum iaculis. Sed elementum commodo ultricies. Proin semper
+                            scelerisque risus, tristique volutpat leo blandit at. Morbi quis quam ante. Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                            potenti. Fusce in lectus ac eros bibendum iaculis vel non magna.
+                            Praesent elit tellus, vulputate feugiat eleifend id, vulputate a metus.
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                        </div>
+                    </div>
+                    <!-- Other sections -->
+                </div>
+
+                <!-- MAIN CONTENT Middle Column -->
+                <div class="col-md-4">
+                    <div class="card shadow fade-in-cardMiddle">
+                        <div class="card-header alert-link alert-success">TITULO</div>
+                        <div class="card-body">
+                            <!-- Content -->
+                        </div>
+                    </div>
+                    <!-- Other sections -->
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-md-4">
+                    <div class="card shadow fade-in-cardRight">
+                        <div class="card-header alert-link alert-success ">TITULO</div>
+                        <div class="card-body">
+                            DLorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed cursus, nisi a pharetra rhoncus, odio ipsum fermentum arcu, a hendrerit
+                            erat elit eu mauris. Vivamus eu convallis leo, in condimentum lacus. Pellentesque
+                            massa sem,mollis a lobortis eget, efficitur vitae augue. Maecenas auctor, urna
+                            id facilisis semper, tellus erat aliquam purus, at egestas turpis lacus eu ligula.
+                            Morbi turpis tortor, luctus vel est et, varius vestibulum ex. Duis ac diam at dolor
+                            maximus consequat at eu ex. Morbi sagittis turpis urna, non placerat ligula cursus id.
+                            Aenean vel dictum augue. Morbi id ligula faucibus, mattis magna ac, aliquam arcu. Duis
+                            fermentum eros vitae fermentum iaculis. Sed elementum commodo ultricies. Proin semper
+                            scelerisque risus, tristique volutpat leo blandit at. Morbi quis quam ante. Lorem
+                            ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                            potenti. Fusce in lectus ac eros bibendum iaculis vel non magna.
+                            Praesent elit tellus, vulputate feugiat eleifend id, vulputate a metus.
+                            Fusce malesuada quis orci eget gravida. Morbi ultricies laoreet semper.
+                            Proin volutpat magna in quam varius, non accumsan massa cursus.
+                            Pellentesque eget est pulvinar, venenatis quam sit amet, maximus
+                            dolor. Nulla congue orci nunc, at fringilla est mollis in. Ut vitae mollis
+                            velit. Fusce tincidunt ornare auctor. Praesent eu ullamcorper leo.
+                            Sed accumsan, ipsum ac mattis tempor, mi purus luctus tortor, sit amet
+                            fermentum elit mauris vel tellus.
+                        </div>
+                    </div>
+                    <!-- Other sections -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <footer-component></footer-component>
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    </footer>
+
+    <!-- load js code to storage data  -->
+    <script defer src="js/investigation/lstInvestigations.js"></script>
+    <script defer src="js/user/user-state-updater.js"></script>
+    <script defer src="js/user/authen.js"></script>
+
 </body>
+
 </html>
