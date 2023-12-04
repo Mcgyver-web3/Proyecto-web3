@@ -1,32 +1,28 @@
-var db = firebase.apps[0].firestore();
-const tabla = document.querySelector('#tablaAllInvestigation');
+// Asegúrate de que firebase está inicializado antes de este script
 
-// Llama a cargarCategorias directamente cuando la página se carga
-cargarCategorias();
-
+// Función que carga las categorías/investigaciones
 function cargarCategorias() {
-    db.collection("datosInvestigacion").get().then(querySnapshot => {
-        tabla.innerHTML = "";
-        let investigaciones = [];
+    var db = firebase.firestore();
+    const tabla = document.querySelector('#tablaAllInvestigation');
+    tabla.innerHTML = "";
+    let investigaciones = [];
 
+    db.collection("datosInvestigacion").get().then(querySnapshot => {
         querySnapshot.forEach(doc => {
             let datosInvestigacion = doc.data();
+            let idInvestigacion = doc.id;
             if (datosInvestigacion.userId) {
-                // Buscar el documento de usuario correspondiente por su idemp (que debe ser igual al userId)
                 let promesaUsuario = db.collection("datosUsuarios").where("idemp", "==", datosInvestigacion.userId).get();
                 investigaciones.push(promesaUsuario.then(querySnapshotUsuario => {
-                    // Verificar que encontramos un usuario
+                    let gradoAcademico = 'Grado no especificado';
                     if (!querySnapshotUsuario.empty) {
-                        let datosUsuario = querySnapshotUsuario.docs[0].data(); // Tomar el primer documento ya que idemp es único
-                        let gradoAcademico = datosUsuario.gradoAcademico || 'Grado no especificado';
-                        return construirTarjetaInvestigacion(datosInvestigacion, gradoAcademico);
-                    } else {
-                        console.error(`No se encontró el usuario con userId: ${datosInvestigacion.userId}`);
-                        return construirTarjetaInvestigacion(datosInvestigacion, 'Grado no especificado');
+                        let datosUsuario = querySnapshotUsuario.docs[0].data();
+                        gradoAcademico = datosUsuario.gradoAcademico || 'Grado no especificado';
                     }
+                    return construirTarjetaInvestigacion(datosInvestigacion, idInvestigacion, gradoAcademico);
                 }));
             } else {
-                console.error(`La investigación con ID: ${doc.id} no tiene userId asociado.`);
+                console.error(`La investigación con ID: ${idInvestigacion} no tiene userId asociado.`);
             }
         });
 
@@ -42,25 +38,29 @@ function cargarCategorias() {
     });
 }
 
-function construirTarjetaInvestigacion(datosInvestigacion, gradoAcademico) {
-    // Suponiendo que 'datosInvestigacion.id' es un identificador único para cada investigación
-    var urlComment = 'commentInvestigation.html?id=' + datosInvestigacion.id;
+function construirTarjetaInvestigacion(datosInvestigacion, idInvestigacion, gradoAcademico) {
+    if (!idInvestigacion) {
+        console.error('ID no encontrado para la investigación', datosInvestigacion);
+        return ''; // Salir si no hay ID
+    }
+    var urlComment = 'commentInvestigation.html?id=' + idInvestigacion;
 
+    // Aquí construyes el HTML de la tarjeta usando los datos de la investigación y el ID
     return `
-        <div class="col-md-2 ">
-            <div class="card mb-4 shadow-sm clickable-card" data-id="${datosInvestigacion.id}">
-                <div class="card-header-custom">
-                    <h5 class="card-title"><a href="${urlComment}">${datosInvestigacion.titulo}</a></h5>
-                </div>
-                <div class="card-body-custom">
-                    <h6 class="card-subtitle mb-4 text-muted">Grado académico: ${gradoAcademico}</h6>
-                    <h6 class="card-subtitle mb-2 text-muted">Área de interes: ${datosInvestigacion.area}</h6>
-                    <p class="card-text">${datosInvestigacion.descripcion}</p>
-                </div>
-            </div>
+    <div class="col-md-2 ">
+    <div class="card mb-4 shadow-sm clickable-card" data-id="${idInvestigacion}">
+        <div class="card-header-custom">
+            <h5 class="card-title"><a href="${urlComment}">${datosInvestigacion.titulo}</a></h5>
         </div>
-    `;
+        <div class="card-body-custom">
+            <h6 class="card-subtitle mb-4 text-muted">Grado académico: ${gradoAcademico}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Área de interés: ${datosInvestigacion.area}</h6>
+            <p class="card-text">${datosInvestigacion.descripcion}</p>
+        </div>
+    </div>
+</div>
+`;
 }
 
-
-
+// Agregamos un evento para cargar las investigaciones cuando el documento esté listo
+document.addEventListener('DOMContentLoaded', cargarCategorias);

@@ -42,3 +42,12 @@
   .fade-in-cardMiddle {
     animation: fadeInMiddle 1s ease-in-out;
 }
+
+.categoria-imagen {
+  width: 100px; /* Ancho fijo para todas las imágenes */
+  height: 100px; /* Altura fija para todas las imágenes */
+  object-fit: cover; /* Esto asegura que la imagen se recorte para ajustarse al tamaño, sin distorsionar */
+  border-radius: 5px; /* Opcional: bordes redondeados */
+  margin: 5px; /* Añade un margen alrededor de cada imagen */
+  display: inline-block;
+}
