@@ -1,55 +1,120 @@
 // InvestigationDetails.js
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   const idInvestigacion = obtenerIdDesdeURL();
   if (idInvestigacion) {
-      cargarDetallesInvestigacion(idInvestigacion);
+    cargarDetallesInvestigacion(idInvestigacion);
   } else {
-      document.getElementById('detalleInvestigacion').innerHTML = '<p>No se ha proporcionado ID de investigación.</p>';
+    document.getElementById("detalleInvestigacion").innerHTML =
+      "<p>No se ha proporcionado ID de investigación.</p>";
   }
 });
 
 function obtenerIdDesdeURL() {
   const params = new URLSearchParams(window.location.search);
-  return params.get('id'); // Esto obtiene el ID de la URL.
+  return params.get("id"); // Esto obtiene el ID de la URL.
 }
 
 function cargarDetallesInvestigacion(id) {
-  const detallesContainer = document.getElementById('detalleInvestigacion');
+  const detallesContainer = document.getElementById("detalleInvestigacion");
   var db = firebase.firestore(); // Asegúrate de que firebase está inicializado antes de este script
 
-  db.collection("datosInvestigacion").doc(id).get().then(doc => {
+  db.collection("datosInvestigacion")
+    .doc(id)
+    .get()
+    .then((doc) => {
       if (doc.exists) {
-          const datosInvestigacion = doc.data();
-          if (datosInvestigacion.userId) {
-              // Ahora buscamos los datos del usuario asociado con la investigación
-              db.collection("datosUsuarios").where("idemp", "==", datosInvestigacion.userId).get().then(querySnapshot => {
-                  if (!querySnapshot.empty) {
-                      const datosUsuario = querySnapshot.docs[0].data();
-                      detallesContainer.innerHTML = construirDetallesInvestigacion(datosInvestigacion, datosUsuario.gradoAcademico, datosUsuario.email, datosUsuario.usuario);
-                  } else {
-                      detallesContainer.innerHTML = '<p>Detalles del usuario no encontrados para la investigación con ID: ' + id + '.</p>';
-                  }
-              }).catch(error => {
-                  console.error("Error al obtener detalles del usuario: ", error);
-                  detallesContainer.innerHTML = '<p>Error al cargar los detalles del usuario.</p>';
-              });
-          } else {
-              detallesContainer.innerHTML = '<p>La investigación no tiene un userId asociado.</p>';
-          }
+        const datosInvestigacion = doc.data();
+        if (datosInvestigacion.userId) {
+          // Ahora buscamos los datos del usuario asociado con la investigación
+          db.collection("datosUsuarios")
+            .where("idemp", "==", datosInvestigacion.userId)
+            .get()
+            .then((querySnapshot) => {
+              if (!querySnapshot.empty) {
+                const datosUsuario = querySnapshot.docs[0].data();
+                detallesContainer.innerHTML = construirDetallesInvestigacion(
+                  datosInvestigacion,
+                  datosUsuario.gradoAcademico,
+                  datosUsuario.email,
+                  datosUsuario.usuario
+                );
+              } else {
+                detallesContainer.innerHTML =
+                  "<p>Detalles del usuario no encontrados para la investigación con ID: " +
+                  id +
+                  ".</p>";
+              }
+            })
+            .catch((error) => {
+              console.error("Error al obtener detalles del usuario: ", error);
+              detallesContainer.innerHTML =
+                "<p>Error al cargar los detalles del usuario.</p>";
+            });
+        } else {
+          detallesContainer.innerHTML =
+            "<p>La investigación no tiene un userId asociado.</p>";
+        }
       } else {
-          detallesContainer.innerHTML = '<p>Investigación no encontrada.</p>';
+        detallesContainer.innerHTML = "<p>Investigación no encontrada.</p>";
       }
-  }).catch(error => {
+    })
+    .catch((error) => {
       console.error("Error al obtener detalles de la investigación: ", error);
-      detallesContainer.innerHTML = '<p>Error al cargar los detalles de la investigación.</p>';
-  });
+      detallesContainer.innerHTML =
+        "<p>Error al cargar los detalles de la investigación.</p>";
+    });
 }
 
-function construirDetallesInvestigacion(datosInvestigacion, gradoAcademico, email, usuario) {
+function construirDetallesInvestigacion(
+  datosInvestigacion,
+  gradoAcademico,
+  email,
+  usuario
+) {
   return `
       <h2>${datosInvestigacion.titulo}</h2>
       <h4>${usuario}</h4>
+      <style>
+        /* IZQUIERDA */
+        @keyframes fadeIn {
+          from { 
+            opacity: 0; 
+            transform: translateX(-50px); /* La tarjeta comienza 50px a la izquierda de su posición final */
+        }
+          to { opacity: 1; }
+          transform: translateX(0);
+        }
+        .fade-in-card {
+          animation: fadeIn 1s ease-in-out;
+        }
 
+
+         /* DERECHA*/
+         @keyframes fadeInRight {
+          from { 
+            opacity: 0; 
+            transform: translateX(100px); /* La tarjeta comienza 50px a la izquierda de su posición final */
+        }
+          to { opacity: 1; }
+          transform: translateX(0);
+        }
+        .fade-in-cardRight {
+          animation: fadeInRight 1s ease-in-out;
+        }
+
+        /* CENTRO */
+        @keyframes fadeInMiddle {
+          from { 
+            opacity: 0; 
+            transform: scale(0.10); /* La tarjeta comienza 50px a la izquierda de su posición final */
+        }
+          to { opacity: 1; }
+          transform: scale(0);
+        }
+        .fade-in-cardMiddle {
+          animation: fadeInMiddle 1s ease-in-out;
+        }
+      </style>
       <div class="container-fluid mt-4">
       <div class="row">
         <!-- DISCIPLINA Column -->
@@ -58,7 +123,9 @@ function construirDetallesInvestigacion(datosInvestigacion, gradoAcademico, emai
             <div class="card-header alert-link ">INFORMACIÓN GENERAL</div>
             <div class="card-body">
               <p>Área de interés: ${datosInvestigacion.area}</p>
-              <p>Grado académico: ${gradoAcademico || 'Información no disponible'}</p>
+              <p>Grado académico: ${
+                gradoAcademico || "Información no disponible"
+              }</p>
             </div>
           </div>
           <div class="card flex mt-4 shadow fade-in-cardMiddle">
@@ -78,7 +145,7 @@ function construirDetallesInvestigacion(datosInvestigacion, gradoAcademico, emai
           <div class="card flex mt-4 shadow fade-in-cardMiddle">
               <div class="card-header alert-link">INFORMACIÓN DE CONTACTO:</div>
               <div class="card-body">
-              <p>Email: ${email || 'Información no disponible'}</p>
+              <p>Email: ${email || "Información no disponible"}</p>
               </div>
           </div>
         </div>
