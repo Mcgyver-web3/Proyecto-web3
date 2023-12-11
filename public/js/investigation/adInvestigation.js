@@ -27,8 +27,11 @@ btnLoad.addEventListener('click', function() {
     if (!archivoPdf) {
         alert('Debe seleccionar un archivo PDF.');
         return;
-    } else if (archivos.length === 0) {
-        alert('Debe seleccionar al menos una imagen.');
+    } else if (archivos.length < 4) {
+        alert('Debe seleccionar al menos cuatro imágenes.');
+        return;
+    } else if (archivos.length > 6) {
+        alert('No puede seleccionar más de seis imágenes.');
         return;
     }
 

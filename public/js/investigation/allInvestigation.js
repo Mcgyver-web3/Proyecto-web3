@@ -7,10 +7,14 @@ function cargarCategorias() {
     tabla.innerHTML = "";
     let investigaciones = [];
 
+    const filtroArea = document.querySelector('#filtroArea').value;
+    const filtroGrado = document.querySelector('#filtroGrado').value;
+
     db.collection("datosInvestigacion").get().then(querySnapshot => {
         querySnapshot.forEach(doc => {
             let datosInvestigacion = doc.data();
             let idInvestigacion = doc.id;
+
             if (datosInvestigacion.userId) {
                 let promesaUsuario = db.collection("datosUsuarios").where("idemp", "==", datosInvestigacion.userId).get();
                 investigaciones.push(promesaUsuario.then(querySnapshotUsuario => {
@@ -19,10 +23,14 @@ function cargarCategorias() {
                         let datosUsuario = querySnapshotUsuario.docs[0].data();
                         gradoAcademico = datosUsuario.gradoAcademico || 'Grado no especificado';
                     }
-                    return construirTarjetaInvestigacion(datosInvestigacion, idInvestigacion, gradoAcademico);
+                    if ((filtroArea === 'Selecciona un área' || datosInvestigacion.area === filtroArea) &&
+                        (filtroGrado === 'Selecciona un grado' || gradoAcademico === filtroGrado)) {
+                        return construirTarjetaInvestigacion(datosInvestigacion, idInvestigacion, gradoAcademico);
+                    }
                 }));
             } else {
                 console.error(`La investigación con ID: ${idInvestigacion} no tiene userId asociado.`);
+            
             }
         });
 
@@ -37,6 +45,10 @@ function cargarCategorias() {
         tabla.innerHTML = '<p>Error al cargar las investigaciones.</p>';
     });
 }
+
+// Añade eventos de cambio a los filtros
+document.querySelector('#filtroArea').addEventListener('change', cargarCategorias);
+document.querySelector('#filtroGrado').addEventListener('change', cargarCategorias);
 
 function construirTarjetaInvestigacion(datosInvestigacion, idInvestigacion, gradoAcademico) {
     if (!idInvestigacion) {

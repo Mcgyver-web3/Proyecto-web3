@@ -51,38 +51,39 @@
     </header>
 
     <main>
+            <div id="detalleInvestigacion">
+                 <!-- Los datos de la investigación se cargaran aquí -->
+            </div>
 
-        
-        <main>
-            <div id="detalleInvestigacion"></div>
-          </main>
-          
-          <div class="comment-container">
-            <div class="comment-header">
-                <div class="user-avatar"></div>
-                <div class="user-info">
-                    <div class="user-name">Uriel Rodríguez</div>
-                    <div class="comment-date">hace 1 hora</div>
+            <div class="comment-container">
+                <div class="comment-header">
+                    <div class="user-avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">Uriel Rodríguez</div>
+                        <div class="comment-date">hace 1 hora</div>
+                    </div>
+                </div>
+                <div class="comment-text">
+                    Hola, exelente investigación sobre este tipo de animales, he estado en busca de una
+                    buena página para mis trabajos de ciencias y lo encontré.
+                </div>
+                <div class="comment-footer">
+                    <a href="#">Responder</a> ·
+                    <a href="#">Compartir</a>
                 </div>
             </div>
-            <div class="comment-text">
-                Hola, exelente investigación sobre este tipo de animales, he estado en busca de una
-                buena página para mis trabajos de ciencias y lo encontré.
-            </div>
-            <div class="comment-footer">
-                <a href="#">Responder</a> ·
-                <a href="#">Compartir</a>
-            </div>
-        </div>
 
+            <div class="comment-box">
+                <form>
+                    <label for="comment">Comentario:</label>
+                    <textarea id="comment" name="comment" rows="4" required></textarea>
+                    <button type="submit">Enviar Comentario</button>
+                </form>
+            </div>
 
-        <div class="comment-box">
-            <form action="/submit-comment" method="post">
-                <label for="comment">Comentario:</label>
-                <textarea id="comment" name="comment" rows="4" required></textarea>
-                <button type="submit">Enviar Comentario</button>
-            </form>
-        </div>
+            <div id="comments-container">
+                <!-- Los comentarios se cargarán aquí dinámicamente -->
+            </div>
 
     </main>
 

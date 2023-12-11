@@ -71,9 +71,36 @@ function construirDetallesInvestigacion(
   email,
   usuario
 ) {
+
+  let imagenesHTML = '<div class="contenedor-imagenes">';
+  datosInvestigacion.urlImages.forEach((url, index) => {
+    // Alternar la clase para la alineación izquierda/derecha basada en el índice
+    let claseAlineacion = index % 2 === 0 ? 'imagen-izquierda' : 'imagen-derecha';
+    imagenesHTML += `
+      <div class="${claseAlineacion}">
+        <img src="${url}" class="imagen-investigacion" alt="Imagen de investigación">
+      </div>`;
+  });
+  imagenesHTML += '</div>';
+
+  let urlPdf = datosInvestigacion.urlPdf;
+
+  // Ahora construimos el elemento de imagen que también es un enlace de descarga
+  let pdfDownloadHTML = urlPdf ? 
+    `<a href="${urlPdf}" download>
+       <img src="img/listInvest/pdf.png" alt="Descargar PDF" class="categoria-imagen">
+     </a>` : '<p>No hay PDF disponible para descargar.</p>';
+
+
   return `
+  <div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12 text-center"> <!-- Agrega una columna que ocupe todo el ancho y centra el texto -->
       <h2>${datosInvestigacion.titulo}</h2>
       <h4>${usuario}</h4>
+    </div>
+    
+</div>
       <style>
         /* IZQUIERDA */
         @keyframes fadeIn {
@@ -129,11 +156,11 @@ function construirDetallesInvestigacion(
             </div>
           </div>
           <div class="card flex mt-4 shadow fade-in-card">
-              <div class="card-header alert-link">INVESTIGACIÓN</div>
-              <div class="card-body">
-                  <img src="img/listInvest/pdf.png" alt="PDF" class="categoria-imagen"> 
-                  <!-- More content can be added here -->
-              </div>
+          <div class="card-header alert-link">INVESTIGACIÓN</div>
+          <div class="card-body">
+            ${pdfDownloadHTML} <!-- Elemento de imagen como enlace de descarga aquí -->
+            <!-- Más contenido puede ser agregado aquí -->
+            </div>
           </div>
           <div class="card flex-fill mt-4 shadow fade-in-card">
               <div class="card-header alert-link">DESCRIPCIÓN</div>
@@ -154,9 +181,7 @@ function construirDetallesInvestigacion(
         <div class="col-md-6 d-flex-fill flex-column fade-in-cardMiddle">
           <!-- Existing Card -->
           <div class="card mb-3 shadow">
-            <img src="img/principal/circulo1.jpeg" class="card-img-top img-fluid" alt="Descripción de la imagen">
-            
-            <!-- Image content here -->
+            ${imagenesHTML}
           </div>
         </div>
         

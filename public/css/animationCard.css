@@ -51,3 +51,17 @@
   margin: 5px; /* Añade un margen alrededor de cada imagen */
   display: inline-block;
 }
+
+/* Estilos CSS */
+.imagen-investigacion {
+  max-width: 100%; /* Asegura que la imagen no sea más grande que su contenedor */
+  max-height: 500px; /* Altura máxima de la imagen */
+  object-fit: cover; /* Ajusta la imagen al contenedor sin perder sus proporciones */
+  margin-bottom: 10px; /* Espacio entre imágenes si hay más de una */
+}
+
+.contenedor-imagenes {
+  display: flex; /* Utiliza Flexbox */
+  justify-content: space-between; /* Separa las imágenes */
+  flex-wrap: wrap; /* Permite que las imágenes se coloquen en filas adicionales si no caben */
+}
